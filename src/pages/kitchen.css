@@ -1,0 +1,274 @@
+/* ================================================
+   KITCHEN DISPLAY — Dark Theme
+   ================================================ */
+
+.kitchen-page {
+  padding: var(--space-md);
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: 100dvh;
+  background: var(--bg-primary);
+}
+
+.kitchen-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  padding: var(--space-md) 0;
+  margin-bottom: var(--space-md);
+}
+
+.kitchen-header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.kitchen-stats {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.stat-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 700;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+}
+
+.stat-pill .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.stat-pill .dot.new { background: var(--status-new); }
+.stat-pill .dot.preparing { background: var(--status-preparing); }
+.stat-pill .dot.ready { background: var(--status-ready); }
+
+/* Orders Grid */
+.orders-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--space-md);
+}
+
+/* Order Card */
+.order-card {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  border: 2px solid var(--border-color);
+  overflow: hidden;
+  transition: var(--transition-normal);
+  animation: slideInRight 0.4s ease-out both;
+}
+
+.order-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.order-card.status-new {
+  border-color: rgba(239, 68, 68, 0.3);
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+.order-card.status-preparing {
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+.order-card.status-ready {
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+/* Card Header Strip */
+.order-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-md) var(--space-sm);
+}
+
+.order-id-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.order-id {
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.table-tag {
+  padding: 4px 12px;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.order-timer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.order-timer.urgent {
+  color: var(--status-new);
+}
+
+.order-timer.normal {
+  color: var(--text-muted);
+}
+
+.timer-icon {
+  font-size: 1rem;
+}
+
+/* Card Items */
+.order-items-list {
+  padding: var(--space-sm) var(--space-md);
+}
+
+.order-item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.order-item-row:last-child {
+  border-bottom: none;
+}
+
+.item-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.item-qty {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--primary);
+  padding: 4px 12px;
+  background: rgba(99, 102, 241, 0.08);
+  border-radius: var(--radius-full);
+  min-width: 40px;
+  text-align: center;
+}
+
+/* Card Footer — Status Actions */
+.order-card-footer {
+  padding: var(--space-sm) var(--space-md) var(--space-md);
+}
+
+.status-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: var(--transition-fast);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.status-btn:active {
+  transform: scale(0.97);
+}
+
+.status-btn.btn-new {
+  background: var(--status-new-bg);
+  color: var(--status-new);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.status-btn.btn-new:hover {
+  background: var(--status-new);
+  color: white;
+}
+
+.status-btn.btn-preparing {
+  background: var(--status-preparing-bg);
+  color: var(--status-preparing);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+.status-btn.btn-preparing:hover {
+  background: var(--status-preparing);
+  color: white;
+}
+
+.status-btn.btn-ready {
+  background: var(--status-ready-bg);
+  color: var(--status-ready);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.status-btn.btn-ready:hover {
+  background: var(--status-ready);
+  color: white;
+}
+
+/* Filter Tabs */
+.filter-tabs {
+  display: flex;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+  flex-wrap: wrap;
+}
+
+.filter-tab {
+  padding: 10px 20px;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  transition: var(--transition-fast);
+}
+
+.filter-tab:hover {
+  background: var(--bg-tertiary);
+}
+
+.filter-tab.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+@media (max-width: 640px) {
+  .orders-grid {
+    grid-template-columns: 1fr;
+  }
+  .kitchen-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .kitchen-stats {
+    width: 100%;
+  }
+}
