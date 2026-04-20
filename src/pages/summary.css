@@ -50,6 +50,26 @@
   box-shadow: var(--shadow-sm);
 }
 
+input[type="date"].summary-tab-btn {
+     font-family: inherit;
+     color: var(--text-primary);
+     background-color: var(--bg-secondary);
+     min-width: 130px;
+     min-height: 38px;
+     display: inline-flex;
+     align-items: center;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+     cursor: pointer;
+     opacity: 0.6;
+     transition: 0.2s;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+     opacity: 1;
+}
+
 /* Revenue Card */
 .stat-revenue {
   background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(52, 211, 153, 0.12));
