@@ -9,24 +9,30 @@ import AdminMenu from "./pages/AdminMenu";
 import Login from "./pages/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 
-
-
 function App() {
-    return (
-          <BrowserRouter>
-                <Routes>
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>ProtectedRoute>} />
-                                <Route path="/waiter" element={<ProtectedRoute><Waiter /></ProtectedRoute>ProtectedRoute>} />
-                                        <Route path="/kitchen" element={<ProtectedRoute reqRole="kitchen"><Kitchen /></ProtectedRoute>ProtectedRoute>} />
-                                                <Route path="/counter" element={<ProtectedRoute reqRole="admin"><Counter /></ProtectedRoute>ProtectedRoute>} />
-                                                        <Route path="/summary" element={<ProtectedRoute reqRole="admin"><Summary /></ProtectedRoute>ProtectedRoute>} />
-                                                                <Route path="/billing" element={<ProtectedRoute reqRole="admin"><Billing /></ProtectedRoute>ProtectedRoute>} />
-                                                                        <Route path="/admin/menu" element={<ProtectedRoute reqRole="admin"><AdminMenu /></ProtectedRoute>ProtectedRoute>} />
-                                                                                <Route path="*" element={<Navigate to="/" replace />} />
-                                                                        </Route>Routes>
-                                                                </Route>BrowserRouter>
-                                                          );
-                                                          }
-                                                        
-                                                        export default App;</BrowserRouter>
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        
+        {/* Protected Home Dashboard */}
+        <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+        
+        {/* Available to Waiters & Admins */}
+        <Route path="/waiter" element={<ProtectedRoute><Waiter /></ProtectedRoute>} />
+        
+        {/* Kitchen: accessible by kitchen role & admin */}
+        <Route path="/kitchen" element={<ProtectedRoute reqRole="kitchen"><Kitchen /></ProtectedRoute>} />
+        <Route path="/counter" element={<ProtectedRoute reqRole="admin"><Counter /></ProtectedRoute>} />
+        <Route path="/summary" element={<ProtectedRoute reqRole="admin"><Summary /></ProtectedRoute>} />
+        <Route path="/billing" element={<ProtectedRoute reqRole="admin"><Billing /></ProtectedRoute>} />
+        <Route path="/admin/menu" element={<ProtectedRoute reqRole="admin"><AdminMenu /></ProtectedRoute>} />
+
+        {/* Catch-all */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+export default App;
