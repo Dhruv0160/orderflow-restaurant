@@ -16,20 +16,25 @@ export default function Waiter() {
   const [submitting, setSubmitting] = useState(false);
   const [successOrder, setSuccessOrder] = useState(null);
 
-  const categories = useMemo(() => {
-    return [...new Set(menuItems.map(m => m.category))];
-  }, [menuItems]);
-
-  useEffect(() => {
-    if (categories.length > 0 && !activeCategory) {
-      setActiveCategory(categories[0]);
-    }
-  }, [categories, activeCategory]);
-
-  const displayedItems = useMemo(() => {
-    return menuItems.filter((item) => item.category === activeCategory);
-  }, [activeCategory, menuItems]);
-
+  
+    const uniqueMenuItems = useMemo(() => {
+          return Array.from(new Map(menuItems.map(m => [m.name, m])).values());
+    }, [menuItems]);
+  
+    const categories = useMemo(() => {
+          return [...new Set(uniqueMenuItems.map(m => m.category))];
+    }, [uniqueMenuItems]);
+  
+    useEffect(() => {
+          if (categories.length > 0 && !activeCategory) {
+                  setActiveCategory(categories[0]);
+          }
+    }, [categories, activeCategory]);
+  
+    const displayedItems = useMemo(() => {
+          return uniqueMenuItems.filter((item) => item.category === activeCategory);
+    }, [activeCategory, uniqueMenuItems]);
+  
   const updateQty = useCallback((name, delta) => {
     setQuantities((prev) => ({
       ...prev,
@@ -38,9 +43,9 @@ export default function Waiter() {
   }, []);
 
   const totalItems = Object.values(quantities).reduce((sum, q) => sum + q, 0);
-  const totalPrice = menuItems.reduce((sum, item) => sum + (item.price * (quantities[item.name] || 0)), 0);
-  const selectedItems = menuItems.filter((item) => quantities[item.name] > 0);
-
+    const totalPrice = uniqueMenuItems.reduce((sum, item) => sum + (item.price * (quantities[item.name] || 0)), 0);
+    const selectedItems = uniqueMenuItems.filter((item) => quantities[item.name] > 0);
+  
   const handleSubmit = async () => {
     if (totalItems === 0 || !tableNumber) return;
     setSubmitting(true);
