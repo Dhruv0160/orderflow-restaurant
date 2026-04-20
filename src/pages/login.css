@@ -1,116 +1,140 @@
+.login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  background: var(--bg-primary);
+  padding: var(--space-md);
+}
+
 .login-container {
-      min-height: 100vh;
-        display: flex;
-          align-items: center;
-            justify-content: center;
-              background-color: #f3f4f6;
-                padding: 1rem;
-                }
+  background: var(--bg-secondary);
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-color);
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-                .login-card {
-                  background: white;
-                    padding: 2.5rem;
-                      border-radius: 12px;
-                        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-                          width: 100%;
-                            max-width: 400px;
-                }
+.login-logo {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
 
-                .login-header {
-                      text-align: center;
-                        margin-bottom: 2rem;
-                        }
+.login-subtitle {
+  color: var(--text-secondary);
+  margin-bottom: var(--space-xl);
+  font-size: 1rem;
+}
 
-                        .logo {
-                              font-size: 3rem;
-                                margin-bottom: 0.5rem;
-                                }
+/* PIN Display */
+.pin-display {
+  display: flex;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
 
-                                .login-header h1 {
-                                      margin: 0;
-                                        color: #111827;
-                                          font-size: 1.875rem;
-                                          }
+.pin-display.error {
+  animation: shake 0.4s ease-in-out;
+}
 
-                                          .login-header p {
-                                              color: #6b7280;
-                                                margin: 0.5rem 0 0 0;
-                                                }
+.pin-dot {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+  background: var(--bg-tertiary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: var(--primary);
+  transition: all 0.2s;
+}
 
-                                                .form-group {
-                                                  margin-bottom: 1.5rem;
-                                                  }
+.pin-dot.filled {
+  border-color: var(--primary);
+  background: var(--primary-light);
+  transform: scale(1.1);
+}
 
-                                                  .form-group label {
-                                                      display: block;
-                                                        font-size: 0.875rem;
-                                                          font-weight: 500;
-                                                            color: #374151;
-                                                              margin-bottom: 0.5rem;
-                                                              }
+/* Numpad */
+.numpad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  width: 100%;
+  margin-bottom: var(--space-xl);
+}
 
-                                                              .form-group input {
-                                                                width: 100%;
-                                                                  padding: 0.75rem;
-                                                                    border: 1px solid #d1d5db;
-                                                                      border-radius: 6px;
-                                                                        font-size: 1rem;
-                                                                          transition: border-color 0.2s, box-shadow 0.2s;
-                                                                          }
+.num-btn {
+  background: var(--bg-tertiary);
+  border: none;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  height: 70px;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all 0.1s;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
 
-                                                                          .form-group input:focus {
-                                                                            outline: none;
-                                                                              border-color: #3b82f6;
-                                                                                box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-                                                                                }
+.num-btn:hover {
+  background: var(--bg-hover);
+}
 
-                                                                                .login-btn {
-                                                                                  width: 100%;
-                                                                                    padding: 0.75rem;
-                                                                                      background-color: #2563eb;
-                                                                                        color: white;
-                                                                                          border: none;
-                                                                                            border-radius: 6px;
-                                                                                              font-size: 1rem;
-                                                                                                font-weight: 600;
-                                                                                                  cursor: pointer;
-                                                                                                    transition: background-color 0.2s;
-                                                                                                    }
+.num-btn:active {
+  transform: scale(0.95);
+  background: var(--border-color);
+}
 
-                                                                                                    .login-btn:hover {
-                                                                                                      background-color: #1d4ed8;
-                                                                                                      }
+.num-btn.invisible {
+  visibility: hidden;
+}
 
-                                                                                                      .login-btn:disabled {
-                                                                                                        background-color: #93c5fd;
-                                                                                                          cursor: not-allowed;
-                                                                                                          }
+.num-btn.action {
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+}
 
-                                                                                                          .error-alert {
-                                                                                                            background-color: #fee2e2;
-                                                                                                              border: 1px solid #fecaca;
-                                                                                                                color: #991b1b;
-                                                                                                                  padding: 0.75rem;
-                                                                                                                    border-radius: 6px;
-                                                                                                                      margin-bottom: 1.5rem;
-                                                                                                                        font-size: 0.875rem;
-                                                                                                                          text-align: center;
-                                                                                                                          }
+.demo-hint {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  border-top: 1px dashed var(--border-color);
+  padding-top: var(--space-md);
+  width: 100%;
+}
 
-                                                                                                                          .login-footer {
-                                                                                                                            margin-top: 2rem;
-                                                                                                                              padding-top: 1.5rem;
-                                                                                                                                border-top: 1px solid #f3f4f6;
-                                                                                                                                  text-align: center;
-                                                                                                                                  }
+.demo-hint p {
+  margin-bottom: 4px;
+}
 
-                                                                                                                                  .login-footer p {
-                                                                                                                                    font-size: 0.75rem;
-                                                                                                                                      color: #9ca3af;
-                                                                                                                                      }
-                                                  }
-                                          }
-                                }
-                        }
-                }
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(10px); }
+  50% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
+  100% { transform: translateX(0); }
+}
+
+.powered-by {
+  margin-top: var(--space-md);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+.powered-by strong {
+  color: var(--primary);
+  font-weight: 700;
 }
