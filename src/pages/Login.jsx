@@ -1,81 +1,97 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import './login.css';
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import "./login.css";
 
-const Login = () => {
-      const [email, setEmail] = useState('');
-        const [password, setPassword] = useState('');
-          const [error, setError] = useState('');
-            const [loading, setLoading] = useState(false);
-              const { login } = useAuth();
-                const navigate = useNavigate();
+export default function Login() {
+  const [pin, setPin] = useState("");
+  const [error, setError] = useState(false);
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
-                  const handleSubmit = async (e) => {
-                        e.preventDefault();
-                            try {
-                                      setError('');
-                                            setLoading(true);
-                                                  await login(email, password);
-                                                        navigate('/');
-                                                            } catch (err) {
-                                                                      setError('Failed to sign in. Please check your credentials.');
-                                                            } finally {
-                                                                      setLoading(false);
-                                                            }
-                                                              };
+  const handlePadClick = (number) => {
+    if (pin.length < 4) {
+      setPin((prev) => prev + number);
+      setError(false);
+    }
+  };
 
-                                                                return (
-                                                                        <div className="login-container">
-                                                                                  <div className="login-card">
-                                                                                            <div className="login-header">
-                                                                                                          <div className="logo">ORDERFLOW</div>
-                                                                                                                    <h1>OrderFlow</h1>
-                                                                                                                              <p>Restaurant Management System</p>
-                                                                                                                                      </div>
+  // Physical keyboard + numpad support
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      // Digit row (Digit0–Digit9) and numpad (Numpad0–Numpad9)
+      if (/^(Digit|Numpad)\d$/.test(e.code)) {
+        const num = e.code.slice(-1); // last character is the digit
+        handlePadClick(num);
+      } else if (e.key === "Backspace" || e.key === "Delete") {
+        handleDelete();
+      } else if (e.key === "Enter") {
+        handleSubmit();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pin, error]);
 
-                                                                                                                                              {error && <div className="error-alert">{error}</div>}
+  const handleDelete = () => {
+    setPin((prev) => prev.slice(0, -1));
+    setError(false);
+  };
 
-                                                                                                                                                      <form onSubmit={handleSubmit}>
-                                                                                                                                                                  <div className="form-group">
-                                                                                                                                                                                <label>Email Address</label>
-                                                                                                                                                                                            <input
-                                                                                                                                                                                                          type="email"
-                                                                                                                                                                                                                        value={email}
-                                                                                                                                                                                                                                      onChange={(e) => setEmail(e.target.value)}
-                                                                                                                                                                                                                                                    required
-                                                                                                                                                                                                                                                                  placeholder="admin@orderflow.com"
-                                                                                                                                                                                                                                                                              />
-                                                                                                                                                                                                                                                                                        </div>
+  const handleSubmit = (e) => {
+    if (e) e.preventDefault();
+    if (pin.length !== 4) return;
 
-                                                                                                                                                                                                                                                                                                  <div className="form-group">
-                                                                                                                                                                                                                                                                                                                <label>Password</label>
-                                                                                                                                                                                                                                                                                                                            <input
-                                                                                                                                                                                                                                                                                                                                          type="password"
-                                                                                                                                                                                                                                                                                                                                                        value={password}
-                                                                                                                                                                                                                                                                                                                                                                      onChange={(e) => setPassword(e.target.value)}
-                                                                                                                                                                                                                                                                                                                                                                                    required
-                                                                                                                                                                                                                                                                                                                                                                                                  placeholder="********"
-                                                                                                                                                                                                                                                                                                                                                                                                              />
-                                                                                                                                                                                                                                                                                                                                                                                                                        </div>
+    const success = login(pin);
+    if (!success) {
+      setError(true);
+      setPin("");
+    } else {
+      navigate("/");
+    }
+  };
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                  <button disabled={loading} type="submit" className="login-btn">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                {loading ? 'Logging in...' : 'Sign In'}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                          </button>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </form>
+  // Auto-submit when length reaches 4
+  if (pin.length === 4 && !error) {
+    handleSubmit();
+  }
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                          <div className="login-footer">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <p>Demo accounts: admin@test.com / waiter@test.com</p>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        );
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        };
+  return (
+    <div className="login-page">
+      <div className="login-container">
+        <h1 className="login-logo">🍔 OrderFlow</h1>
+        <h2 style={{ fontSize: "1.1rem", color: "var(--primary)", marginTop: "-10px", marginBottom: "15px", fontWeight: "700" }}>by Nexora AI</h2>
+        <p className="login-subtitle">Enter your access PIN</p>
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        export default Login;
-                                                                )
-                                                            }
-                                                            }
-                            }
-                  }
+        <div className={`pin-display ${error ? "error" : ""}`}>
+          {[...Array(4)].map((_, i) => (
+            <span key={i} className={`pin-dot ${pin[i] ? "filled" : ""}`}>
+              {pin[i] ? "•" : ""}
+            </span>
+          ))}
+        </div>
+        {error && <p className="error-text">Invalid PIN, try again.</p>}
+
+        <div className="numpad">
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
+            <button key={num} onClick={() => handlePadClick(num.toString())} className="num-btn">
+              {num}
+            </button>
+          ))}
+          <button className="num-btn invisible"></button>
+          <button onClick={() => handlePadClick("0")} className="num-btn">0</button>
+          <button onClick={handleDelete} className="num-btn action">⌫</button>
+        </div>
+
+        <div className="demo-hint">
+          <p>Admin: <strong>0000</strong></p>
+          <p>Waiters: <strong>1111</strong>, <strong>2222</strong>, <strong>3333</strong></p>
+          <p>Chef (Kitchen): <strong>4444</strong></p>
+        </div>
+
+        <p className="powered-by">Powered by <strong>Nexora AI</strong></p>
+      </div>
+    </div>
+  );
 }
