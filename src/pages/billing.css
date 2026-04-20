@@ -1,0 +1,154 @@
+/* ================================================
+   BILLING — Table Bills & Checkout
+   ================================================ */
+
+.billing-page {
+  padding: var(--space-md);
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: 100dvh;
+  background: var(--bg-primary);
+}
+
+.billing-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  padding: var(--space-md) 0;
+  margin-bottom: var(--space-lg);
+}
+
+.billing-header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.tables-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-lg);
+}
+
+.table-bill-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-normal);
+  animation: scaleIn 0.3s ease-out both;
+  display: flex;
+  flex-direction: column;
+}
+
+.table-bill-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.bill-card-header {
+  background: var(--primary);
+  color: white;
+  padding: var(--space-md) var(--space-lg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bill-table-name {
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.bill-status {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.bill-items-container {
+  padding: var(--space-lg);
+  flex: 1;
+}
+
+.bill-item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px dashed var(--border-color);
+}
+
+.bill-item-row:last-child {
+  border-bottom: none;
+}
+
+.bill-item-name {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.bill-item-qty {
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-right: var(--space-md);
+  width: 30px;
+}
+
+.bill-item-price {
+  font-weight: 600;
+  color: var(--text-primary);
+  width: 70px;
+  text-align: right;
+}
+
+.bill-card-footer {
+  padding: var(--space-md) var(--space-lg);
+  background: var(--bg-tertiary);
+  border-top: 1px solid var(--border-color);
+}
+
+.bill-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.settle-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--status-ready), #059669);
+  color: white;
+  font-size: 1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: var(--transition-fast);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+}
+
+.settle-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.35);
+}
+
+.settle-btn:active {
+  transform: scale(0.98);
+}
